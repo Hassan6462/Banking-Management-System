@@ -1,0 +1,3987 @@
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.*;
+
+
+/**
+ * JavaFX App
+ */
+public class IslamicGUI extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        
+        
+        Label phone=new Label("Enter Phone Number");
+        TextField phoneField=new TextField();
+        phoneField.setPrefSize(170, 30);
+       
+        
+        Label email=new Label("Enter Email");
+        TextField emailField=new TextField();
+        emailField.setPrefSize(170, 30);
+        
+        Button ok=new Button("Send OTP");
+        Label otp=new Label("Enter OTP");
+        TextField otpField=new TextField();
+        Button submit=new Button("Submit");
+        submit.setVisible(false);
+        otp.setVisible(false);
+        otpField.setVisible(false);
+        Label pas1=new Label("Enter new Password");
+        Label pas2=new Label("Confirm your Password");
+        PasswordField pas1f=new PasswordField();
+        PasswordField pas2f=new PasswordField();
+        Button done1=new Button("Done");
+        done1.setStyle("-fx-background-color: navy; -fx-text-fill: white");
+        pas1.setVisible(false);
+        pas2.setVisible(false);
+        pas1f.setVisible(false);
+        pas2f.setVisible(false);
+        done1.setVisible(false);
+        Label error1=new Label("Password Could not Match");
+        error1.setVisible(false);
+          Button back1=new Button("Back");
+        back1.setPrefSize(130, 30);
+        back1.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back1.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        VBox phoneEmail=new VBox(2);
+        phoneEmail.setPadding(new Insets(10));
+        phoneEmail.getChildren().addAll(phone,phoneField,email,emailField,ok,otp,otpField,submit,pas1,pas1f,pas2,pas2f,done1,back1,error1);
+        
+       
+        
+        
+        ok.setOnAction(e->{
+            if(phoneField.getText().isEmpty()||emailField.getText().isEmpty() ){
+                System.out.println("Fill all Fields");
+            }else{
+            otp.setVisible(true);
+            otpField.setVisible(true);
+            submit.setVisible(true);
+        }});
+        
+        Scene login=new Scene(phoneEmail,500,750);
+        primaryStage.setTitle("Login Page");
+        primaryStage.setScene(login);
+        primaryStage.show();
+        
+        submit.setOnAction(er->{
+           if((new PasswordCheck().otp(otpField.getText()))==true){
+           pas1.setVisible(true);
+        pas2.setVisible(true);
+        pas1f.setVisible(true);
+        pas2f.setVisible(true);
+        done1.setVisible(true);}
+            
+        });
+        
+        done1.setOnAction(ee->{
+       if(pas1f.getText().equals(pas2f.getText())){
+        
+Label instruction=new Label("1. I confirm that all information I provide is true and correct.\n" +
+"\n" +
+"2. I agree that providing false information may lead to rejection of my application.\n" +
+"\n" +
+"3. I agree to follow all rules and policies of the bank.\n" +
+"\n" +
+"4. I agree that the bank may verify my identity and documents.\n" +
+"\n" +
+"5. I will inform the bank immediately if my personal details change.\n" +
+"\n" +
+"6. I agree that the bank may contact me for verification if needed.\n" +
+"\n" +
+"7. I agree that my account must not be used for illegal activities.\n" +
+"\n" +
+"8. I agree to keep my account login and PIN secure.\n" +
+"\n" +
+"9. I agree to all terms and conditions of account creation.\n"  );
+CheckBox check=new  CheckBox("✔ After reading these instructions, click “I Agree” to continue");
+Button agree=new Button("I Agree");
+agree.setVisible(false);
+check.setOnAction(e->{
+    agree.setVisible(check.isSelected());
+}
+);
+VBox InsPage=new VBox(5,instruction,check,agree);
+Scene s=new Scene(InsPage,500,750);
+primaryStage.setScene(s);
+primaryStage.show();
+
+agree.setOnAction(e->
+{
+ Label tittle=new Label(" United Bank Limited");
+        tittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane root=new BorderPane();
+        root.setTop(tittle);
+        BorderPane.setAlignment(    tittle, Pos.CENTER);
+TextField name=new TextField();
+name.setPrefSize(200, 30);
+TextField fname=new TextField();
+
+fname.setPrefSize(200, 30);
+HBox h1=new HBox(10,new VBox(new Label("Name"),name),new VBox(new Label("Father Name"),fname));
+
+TextField Cnic=new TextField();
+Cnic.setPrefSize(200, 30);
+
+TextField Ph=new TextField(phoneField.getText());
+Ph.setEditable(false);
+Ph.setPrefSize(200, 30);
+HBox h2=new HBox(10,new VBox(new Label("CNIC"),Cnic),new VBox(new Label("Phone No"),Ph));
+
+TextField Account=new TextField(String.valueOf(generateAccountNumber.number()));
+Account.setEditable(false);
+Account.setPrefSize(200, 30);
+VBox v1=new VBox(new Label("Account No:"),Account);
+
+TextArea Address=new TextArea();
+Address.setPrefSize(200, 45);
+VBox v2=new VBox(new Label("Address :"),Address);
+
+ComboBox<String> Profession=new ComboBox<>();
+Profession.getItems().addAll("Student","Government Job","Private Job","Bussiness","Others");
+Profession.setPrefSize(200, 30);
+
+TextField femail=new TextField(emailField.getText());
+femail.setEditable(false);
+email.setPrefSize(200, 30);
+HBox h3=new HBox(10,new VBox(new Label("Profession"),Profession),new VBox(new Label("E-mail"),femail));
+
+ComboBox<String> Income=new ComboBox<>();
+Income.getItems().addAll("10K to 50K","60K to 100K","110K to 200K","210K to 300K","310K to 500K","510K or Above");
+Income.setPrefSize(200, 30);
+
+ComboBox<String> Residiental=new ComboBox<>();
+Residiental.getItems().addAll("Pakistani","Non-Pakistani");
+Residiental.setPrefSize(200, 30);
+HBox v3=new HBox(10,new VBox(new Label("Residiental Status"),Residiental),new VBox(new Label("Income"),Income));
+
+ComboBox<String> SourceOfIncome=new ComboBox<>();
+SourceOfIncome.getItems().addAll("Parents","Siblings","Own","Others");
+SourceOfIncome.setPrefSize(200, 30);
+Button done=new Button("Submit");
+VBox v4=new VBox(new Label("Source Of Income"),SourceOfIncome);
+Label error=new Label("Fill all the Fields");
+error.setStyle("-fx-text-field: red");
+error.setVisible(false);
+  Button back=new Button("Back");
+        back.setPrefSize(130, 30);
+        back.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+
+
+VBox form=new VBox(15,root,h1,h2,v1,v2,h3,v3,v4,done,back,error);
+form.setStyle("-fx-padding:20;"); 
+done.setOnAction(n->{
+    if(name.getText().isEmpty() || fname.getText().isEmpty()|| Cnic.getText().isEmpty()||Address.getText().isEmpty() || Account.getText().isEmpty() || Profession.getValue().isEmpty() ||  emailField.getText().isEmpty()|| Residiental.getValue().isEmpty()||SourceOfIncome.getValue().isEmpty()){
+        System.out.println("Fill all the Fields");
+        error.setVisible(true);
+    }
+    
+    else{
+        System.out.println("run");
+        IslamicBanking ca=new IslamicBanking(name.getText(),fname.getText(),phoneField.getText(),Cnic.getText(),Address.getText(),Long.parseLong(Account.getText()),Profession.getValue(),emailField.getText(),Residiental.getValue(),Income.getValue(),SourceOfIncome.getValue(),pas1f.getText());
+        Conventional.saveAccount(ca);
+        
+        Label in=new Label("You have been Created an account Successfully");
+        Button nn=new Button("Back");
+        
+        VBox vv=new VBox(5,in,nn);
+        vv.setAlignment(Pos.CENTER);
+        Scene cv=new Scene(vv,500,750);
+        primaryStage.setScene(cv);
+        primaryStage.show();
+        
+        nn.setOnAction(er->{
+            new MainMenu().start(primaryStage);
+        });
+        
+    }
+});
+
+
+ScrollPane sp=new ScrollPane(form);
+Scene Scform=new Scene(sp,500,750);
+
+primaryStage.setScene(Scform);
+primaryStage.setTitle("Current Account");
+primaryStage.show();
+});
+InsPage.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+instruction.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+
+
+    }
+       else{
+           error1.setVisible(true);
+       }});
+        }}
+        
+    
+        
+        
+      /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class IslamicBanking extends Conventional implements Account {
+     
+    private String AccountType;
+    private double zakat;
+    
+    IslamicBanking(){}
+    IslamicBanking(String name,String fname,String nmbr,String CNIC,String Address,long accountNumber,String profession,String email,String nationality,String income,String soincome,String pass){
+        super(name,fname,nmbr,CNIC,Address,accountNumber,profession,email,nationality,income,soincome,pass,"Islamic Banking");
+        this.AccountType="Islamic Account";
+    }
+   
+   
+    
+    
+@Override
+public void deposit(double amount){
+    if(amount > 0){
+        this.setBalance(this.getBalance() + amount);
+        this.setTransaction(new Transaction("Deposit", amount, this.getBalance()));
+        System.out.println("Deposit successful: " + amount);
+    } else {
+        System.out.println("Please enter a valid amount");
+    }
+}
+
+
+    
+    public boolean withDraw(double amount){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Withdraw",amount,this.getBalance()));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+    
+   public boolean transfer(double amount,long number){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Transfer",amount,this.getBalance(),number));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+    
+    
+   public String getAccountDetails(){
+        return "Account Number : "+this.getAccountNumber()+"\nAccount Holder : "+this.getAccountHolderName()+"\nAccount Type : Current Account\nBalance : "+this.getBalance();
+    }
+   
+   public void ZakatApply(){
+       long now=System.currentTimeMillis();
+       //if(this.getBalance()>=200000 && (this.getLastUpdateDate()== null || this.getLastUpdateDate().isBefore(LocalDate.now().minusyear(1)))){    
+    if (getLastUpdateDate() == 0L || (now - getLastUpdateDate()) >= 180000) {
+   if(this.getBalance() >= 200000){
+           this.zakat=this.getBalance()*0.025;
+           this.setBalance(this.getBalance()-zakat);
+           this.setTransaction(new Transaction("Zakat Deducted",this.zakat,this.getBalance()));
+       
+       this.setLastUpdateDate(now);}
+   }}
+    
+}
+
+
+  /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class generateAccountNumber {
+    
+    public static long number(){
+        long num=0;
+        try{
+            BufferedReader bis=new BufferedReader(new FileReader("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\accountNumber.txt"));
+           
+            String line=bis.readLine();
+            if(line!=null && !line.isEmpty()){
+                num=Long.parseLong(line);
+                bis.close();
+            }}catch(Exception ee){
+                System.out.println("Error in "+ee);
+                
+            }
+        num++;
+        
+        
+        try{
+            BufferedWriter bw=new BufferedWriter(new FileWriter("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\accountNumber.txt"));
+            bw.write(String.valueOf(num));
+            bw.close();
+        }catch(Exception ee){
+                System.out.println("Error in "+ee);
+                
+            }
+        return num;
+    }
+    
+    
+}
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+
+package com.mycompany.bankingmanagementsystem;
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+/**
+ * JavaFX App
+ */
+public class forgetPass extends Application {
+
+    @Override
+    public void start(Stage stage) {
+            Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(5));
+    
+            Label Createtittle1=new Label("Forget Password");
+        Createtittle1.setStyle("-fx-font-size: 20px; -fx-font-weight:bold;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle1);
+        BorderPane.setAlignment(Createtittle1, Pos.CENTER);
+     
+        Label  ep=new Label("Enter Email/Phone Number");
+        TextField epp=new TextField();
+        epp.setPrefSize(170, 30);
+        
+        Button otp =new Button("Send OTP");
+        
+        
+        Label enterotp=new Label("Enter OTP");
+       TextField otpepp=new TextField();
+       otpepp.setPrefSize(170, 30);
+       Label error=new Label("Invalid Phone Number or Email");
+       error.setVisible(false);
+       
+enterotp.setVisible(false);
+        otpepp.setVisible(false);
+        Button sub =new Button(" Submit");
+           sub.setVisible(false);
+     
+       Label pass=new Label("Enter new Password");
+              TextField passs=new TextField();
+              Label pass1=new Label("Confirm your Password");
+              TextField passs1=new TextField();
+              passs.setPrefSize(170, 30);
+              passs1.setPrefSize(170, 30);
+         pass.setVisible(false);
+         passs.setVisible(false);
+         pass1.setVisible(false);
+         passs1.setVisible(false);
+         
+         otp.setOnAction(eew->{
+             if(new PasswordCheck().reset(epp.getText())==true){
+             enterotp.setVisible(true);
+             otpepp.setVisible(true);
+             sub.setVisible(true);}
+             else{
+                 error.setVisible(true);
+             }
+             
+         });
+        
+        
+
+        
+
+            Button back=new Button("Back");
+        back.setPrefSize(130, 30);
+        back.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+                    Button ok=new Button("OK");
+                    ok.setVisible(false);
+        ok.setPrefSize(130, 30);
+        ok.setStyle("-fx-background-color: red; -fx-text-fill: white");
+        back.setOnAction(e->
+        {
+            new Login().start(stage);
+        }
+        );
+        Label nn=new Label("Password do not Match");
+        nn.setVisible(false);
+             ok.setOnAction(ee->{
+       if(passs.getText().equals(passs1.getText())){
+           PasswordCheck.getAccount().get(0).setPassword(passs.getText());
+           Conventional.updateAccount(PasswordCheck.getAccount().get(0));
+           Label lb=new Label("Your Password Has been Successfully Change");
+           Button bck=new Button("Back");
+           VBox vbb=new VBox(10,lb,bck);
+           vbb.setAlignment(Pos.CENTER);
+           Scene g=new Scene(vbb,500,750);
+           stage.setScene(g);
+           stage.show();
+           bck.setOnAction(eh->{
+               new Login().start(stage);
+           });
+       }else{
+           nn.setVisible(true);
+       }
+             
+             }
+             );
+       Label errL=new Label("Invalid OTP");
+       errL.setVisible(false);
+             
+        sub.setOnAction(er->{
+           if((new PasswordCheck().otp(otpepp.getText()))==true){
+           pass.setVisible(true);
+        pass1.setVisible(true);
+        passs.setVisible(true);
+        passs1.setVisible(true);
+        ok.setVisible(true);}
+           else{
+               errL.setVisible(true);
+           }
+            
+        });
+                VBox v=new VBox(5,Createroot1,Createroot,ep,epp,otp,error,enterotp,otpepp,sub,errL,pass,passs,pass1,passs1,ok,nn,back);
+                v.setPrefSize(170, 30);
+        //v.setStyle("-fx-padding: 30; -fx-alignment: center");
+         StackPane root = new StackPane(v);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+        Scene sc=new Scene(root,500,750);
+
+stage.setScene(sc);
+stage.show();
+
+
+        
+   
+    }
+
+      
+    
+
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class deposit extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+       
+
+    Button backBtn = new Button("Back");
+        backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red");
+
+    
+    backBtn.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+
+
+
+
+    Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+    Button bt=new Button("Deposit Now");
+    bt.setPrefSize(100, 30);
+    bt.setStyle("-fx-background-color: green");
+
+
+    Button back=new Button("Back");
+    back.setPrefSize(100, 30);
+    back.setStyle("-fx-background-color: red");
+
+        back.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+    TextField Deposit=new TextField();
+Deposit.setPrefSize(200, 30);
+HBox h1=new HBox(10,new VBox(new Label("Enter Deposit Amount"),Deposit));
+    h1.setStyle("-fx-padding: 30; -fx-alignment: center");
+
+VBox Dep=new VBox(15,Createroot,h1,back,bt);
+Dep.setStyle("-fx-padding: 30; -fx-alignment: center");
+bt.setOnAction(f->
+{
+    Conventional co=PasswordCheck.getAccount().get(0);
+    co.deposit(Double.parseDouble(Deposit.getText()));
+    Conventional.updateAccount(co);
+   
+   Label lbb=new Label("You Successfully Deposit ");
+      Label lbb1=new Label("Receipt Detail:");
+            Label lbb2=new Label("Deposit Amount");
+            TextField deposit=new TextField(Deposit.getText());
+            deposit.setEditable(false);
+            Label date=new Label("Deposit Date");
+            TextField dp=new TextField(LocalDate.now().toString());
+            dp.setEditable(false);
+
+VBox Dept=new VBox(15,lbb,lbb1,lbb2,deposit,date,dp,backBtn);
+        Scene sc=new Scene(Dept,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+
+
+});
+        Scene sc=new Scene(Dep,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+}
+
+    
+
+
+    
+}
+
+
+package com.mycompany.bankingmanagementsystem;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class deleteaccount extends Application {
+
+    @Override
+    public void start(Stage stage) {
+    
+                    Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+        
+
+       
+
+        
+Label title = new Label("Delete Account");
+title.setStyle("-fx-font-size: 22px; -fx-font-weight: bold;");
+
+TextField Name = new TextField();
+
+Name.setEditable(false);
+
+TextField Balance = new TextField();
+
+Balance.setEditable(false);
+
+
+TextField AccNumber = new TextField();
+AccNumber.setPromptText("Enter Account Number");
+
+Button btnSearch = new Button("Search");
+btnSearch.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+btnSearch.setOnAction(eee->{
+    if(new PasswordCheck().serchAccount(Long.parseLong(AccNumber.getText()))==true){
+    Conventional co=PasswordCheck.getAccount().get(0);
+    Name.setPromptText(co.getAccountHolderName());
+    Balance.setPromptText(String.valueOf(co.getBalance()));
+    }
+});
+
+
+Button btnDelete = new Button("Delete Account");
+btnDelete.setStyle("-fx-background-color: #FFA500; -fx-text-fill: white;");
+
+btnDelete.setOnAction(ee->{
+   if(new PasswordCheck().serchAccount(Long.parseLong(AccNumber.getText()))==true){
+   Conventional xs=PasswordCheck.getAccount().get(0);
+   Conventional.deleteAccount(xs);}
+    System.out.println("Account not Found");
+    
+});
+
+Button backBtn = new Button("Back");
+backBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+    
+backBtn.setOnAction(e -> 
+{
+ new menu2().start(stage);
+    });
+Label msg = new Label();
+VBox root = new VBox(15);
+    
+root.setPadding(new Insets(20));
+root.getChildren().addAll(Createroot1,title,AccNumber,btnSearch,Name,Balance,btnDelete,msg,backBtn);
+        Scene scene = new Scene(root, 500, 750);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+    
+}
+
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.*;
+
+
+/**
+ * JavaFX App
+ */
+public class currentgui extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        
+        
+        Label phone=new Label("Enter Phone Number");
+        TextField phoneField=new TextField();
+        phoneField.setPrefSize(170, 30);
+       
+        
+        Label email=new Label("Enter Email");
+        TextField emailField=new TextField();
+        emailField.setPrefSize(170, 30);
+        
+        Button ok=new Button("Send OTP");
+        Label otp=new Label("Enter OTP");
+        TextField otpField=new TextField();
+        Button submit=new Button("Submit");
+        submit.setVisible(false);
+        otp.setVisible(false);
+        otpField.setVisible(false);
+        Label pas1=new Label("Enter new Password");
+        Label pas2=new Label("Confirm your Password");
+        PasswordField pas1f=new PasswordField();
+        PasswordField pas2f=new PasswordField();
+        Button done1=new Button("Done");
+        done1.setStyle("-fx-background-color: navy; -fx-text-fill: white");
+        pas1.setVisible(false);
+        pas2.setVisible(false);
+        pas1f.setVisible(false);
+        pas2f.setVisible(false);
+        done1.setVisible(false);
+        Label error1=new Label("Password Could not Match");
+        error1.setVisible(false);
+        
+          Button back=new Button("Back");
+        back.setPrefSize(130, 30);
+        back.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        
+        VBox phoneEmail=new VBox(2);
+        phoneEmail.setPadding(new Insets(10));
+        phoneEmail.getChildren().addAll(phone,phoneField,email,emailField,ok,otp,otpField,submit,pas1,pas1f,pas2,pas2f,done1,back,error1);
+        
+       
+        
+        
+        ok.setOnAction(e->{
+            if(phoneField.getText().isEmpty()||emailField.getText().isEmpty() ){
+                System.out.println("Fill all Fields");
+            }else{
+            otp.setVisible(true);
+            otpField.setVisible(true);
+            submit.setVisible(true);
+        }});
+        
+        Scene login=new Scene(phoneEmail,500,750);
+        primaryStage.setTitle("Login Page");
+        primaryStage.setScene(login);
+        primaryStage.show();
+        
+        submit.setOnAction(er->{
+           if((new PasswordCheck().otp(otpField.getText()))==true){
+           pas1.setVisible(true);
+        pas2.setVisible(true);
+        pas1f.setVisible(true);
+        pas2f.setVisible(true);
+        done1.setVisible(true);}
+            
+        });
+        
+        done1.setOnAction(ee->{
+       if(pas1f.getText().equals(pas2f.getText())){
+        
+Label instruction=new Label("1. I confirm that all information I provide is true and correct.\n" +
+"\n" +
+"2. I agree that providing false information may lead to rejection of my application.\n" +
+"\n" +
+"3. I agree to follow all rules and policies of the bank.\n" +
+"\n" +
+"4. I agree that the bank may verify my identity and documents.\n" +
+"\n" +
+"5. I will inform the bank immediately if my personal details change.\n" +
+"\n" +
+"6. I agree that the bank may contact me for verification if needed.\n" +
+"\n" +
+"7. I agree that my account must not be used for illegal activities.\n" +
+"\n" +
+"8. I agree to keep my account login and PIN secure.\n" +
+"\n" +
+"9. I agree to all terms and conditions of account creation.\n"  );
+CheckBox check=new  CheckBox("✔ After reading these instructions, click “I Agree” to continue");
+Button agree=new Button("I Agree");
+agree.setVisible(false);
+check.setOnAction(e->{
+    agree.setVisible(check.isSelected());
+}
+);
+VBox InsPage=new VBox(5,instruction,check,agree);
+Scene s=new Scene(InsPage,500,750);
+primaryStage.setScene(s);
+primaryStage.show();
+
+agree.setOnAction(e->
+{
+ Label tittle=new Label(" United Bank Limited");
+        tittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane root=new BorderPane();
+        root.setTop(tittle);
+        BorderPane.setAlignment(    tittle, Pos.CENTER);
+TextField name=new TextField();
+name.setPrefSize(200, 30);
+TextField fname=new TextField();
+
+fname.setPrefSize(200, 30);
+HBox h1=new HBox(10,new VBox(new Label("Name"),name),new VBox(new Label("Father Name"),fname));
+
+TextField Cnic=new TextField();
+Cnic.setPrefSize(200, 30);
+
+TextField Ph=new TextField(phoneField.getText());
+Ph.setEditable(false);
+Ph.setPrefSize(200, 30);
+HBox h2=new HBox(10,new VBox(new Label("CNIC"),Cnic),new VBox(new Label("Phone No"),Ph));
+
+TextField Account=new TextField(String.valueOf(generateAccountNumber.number()));
+Account.setEditable(false);
+Account.setPrefSize(200, 30);
+VBox v1=new VBox(new Label("Account No:"),Account);
+
+TextArea Address=new TextArea();
+Address.setPrefSize(200, 45);
+VBox v2=new VBox(new Label("Address :"),Address);
+
+ComboBox<String> Profession=new ComboBox<>();
+Profession.getItems().addAll("Student","Government Job","Private Job","Bussiness","Others");
+Profession.setPrefSize(200, 30);
+
+TextField femail=new TextField(emailField.getText());
+femail.setEditable(false);
+email.setPrefSize(200, 30);
+HBox h3=new HBox(10,new VBox(new Label("Profession"),Profession),new VBox(new Label("E-mail"),femail));
+
+ComboBox<String> Income=new ComboBox<>();
+Income.getItems().addAll("10K to 50K","60K to 100K","110K to 200K","210K to 300K","310K to 500K","510K or Above");
+Income.setPrefSize(200, 30);
+
+ComboBox<String> Residiental=new ComboBox<>();
+Residiental.getItems().addAll("Pakistani","Non-Pakistani");
+Residiental.setPrefSize(200, 30);
+HBox v3=new HBox(10,new VBox(new Label("Residiental Status"),Residiental),new VBox(new Label("Income"),Income));
+
+ComboBox<String> SourceOfIncome=new ComboBox<>();
+SourceOfIncome.getItems().addAll("Parents","Siblings","Own","Others");
+SourceOfIncome.setPrefSize(200, 30);
+Button done=new Button("Submit");
+VBox v4=new VBox(new Label("Source Of Income"),SourceOfIncome);
+Label error=new Label("Fill all the Fields");
+error.setStyle("-fx-text-field: red");
+error.setVisible(false);
+
+  Button back1=new Button("Back");
+        back1.setPrefSize(130, 30);
+        back1.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back1.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+
+VBox form=new VBox(15,root,h1,h2,v1,v2,h3,v3,v4,done,error,back1);
+form.setStyle("-fx-padding:20;"); 
+done.setOnAction(n->{
+    if(name.getText().isEmpty() || fname.getText().isEmpty()|| Cnic.getText().isEmpty()||Address.getText().isEmpty() || Account.getText().isEmpty() || Profession.getValue().isEmpty() ||  emailField.getText().isEmpty()|| Residiental.getValue().isEmpty()||SourceOfIncome.getValue().isEmpty()){
+        System.out.println("Fill all the Fields");
+        error.setVisible(true);
+    }
+    
+    else{
+        System.out.println("run");
+        CurrentAccount ca=new CurrentAccount(name.getText(),fname.getText(),phoneField.getText(),Cnic.getText(),Address.getText(),Long.parseLong(Account.getText()),Profession.getValue(),emailField.getText(),Residiental.getValue(),Income.getValue(),SourceOfIncome.getValue(),pas1f.getText());
+        System.out.println(ca.getAccountHolderName());
+        Conventional.saveAccount(ca);
+        
+        Label in=new Label("You have been created an account Successfully");
+        Button nn=new Button("Back");
+        
+        VBox vv=new VBox(5,in,nn);
+        vv.setAlignment(Pos.CENTER);
+        Scene cv=new Scene(vv,500,750);
+        primaryStage.setScene(cv);
+        primaryStage.show();
+        
+        nn.setOnAction(er->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        
+    }
+});
+
+
+ScrollPane sp=new ScrollPane(form);
+Scene Scform=new Scene(sp,500,750);
+
+primaryStage.setScene(Scform);
+primaryStage.setTitle("Current Account");
+primaryStage.show();
+});
+InsPage.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+instruction.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+
+
+    }
+       else{
+           error1.setVisible(true);
+       }});
+        }}
+        
+    
+        
+      /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class CurrentAccount extends Conventional implements Serializable {
+    
+    
+    CurrentAccount(String name,String fname,String nmbr,String CNIC,String Address,long accountNumber,String profession,String email,String nationality,String income,String soincome,String pass){
+    super(name,fname,nmbr,CNIC,Address,accountNumber,profession,email,nationality,income,soincome,pass,"Current Account");
+    
+    }
+    CurrentAccount(){
+    }
+    
+    public boolean transfer(double amount,long number){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Transfer",amount,this.getBalance(),number));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+public void deposit(double amount){
+    if(amount > 0){
+        this.setBalance(this.getBalance() + amount);
+       this.setTransaction(new Transaction("Deposit",amount,this.getBalance()));
+        System.out.println("Deposit successful: " + amount);
+    } else {
+        System.out.println("Please enter a valid amount");
+    }
+}
+
+    
+    public boolean withDraw(double amount){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Withdraw",amount,this.getBalance()));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+    
+
+        
+   
+    
+    
+   public String getAccountDetails(){
+        return "Account Number : "+this.getAccountNumber()+"\nAccount Holder : "+this.getAccountHolderName()+"\nAccount Type : Current Account\nBalance : "+this.getBalance();
+    }
+   
+   
+   
+   
+  /*public static void saveAccount(CurrentAccount newAccount) {
+
+    ArrayList<CurrentAccount> list = readData(); // Step 1: Read old data
+    list.add(newAccount);                        // Step 2: Add new data
+
+    try {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        oos.writeObject(list);                   // Step 3: Write full list again
+        oos.close();
+    } catch (Exception e) {
+        System.out.println("Error saving: " + e.getMessage());
+    }
+}
+   
+   
+   public static ArrayList<CurrentAccount> readData() {
+    ArrayList<CurrentAccount> list = new ArrayList<>();
+
+    try {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        list = (ArrayList<CurrentAccount>) ois.readObject();
+        ois.close();
+    } catch (Exception e) {
+        System.out.println("Error reading file: " + e.getMessage());
+    }
+
+    return list;
+}*/
+    
+    
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class ConventionalGui extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+       Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        
+        
+      
+        
+        Button Current=new Button("Current Digital Account");
+        Button Saving=new Button("Saving Account");
+        Current.setPrefSize(170, 30);
+        Saving.setPrefSize(170, 30);
+        Current.setStyle("-fx-background-color: #ADD8E6; -fx-text-fill: white");
+        Saving.setStyle("-fx-background-color: #ADD8E6; -fx-text-fill: white");        
+        Button back=new Button("Back");
+        back.setPrefSize(130, 30);
+        back.setStyle("-fx-background-color: #ADD8E6; -fx-text-fill: white");  
+        back.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        VBox phoneEmail=new VBox(10);
+        phoneEmail.setPadding(new Insets(10));
+        phoneEmail.getChildren().addAll(Createroot,Current,Saving,back);
+        
+       StackPane root = new StackPane(phoneEmail);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+
+        
+        Scene login=new Scene(root,500,750);
+        primaryStage.setScene(login);
+        primaryStage.show();
+        
+       Current.setOnAction(eh->{
+           currentgui cr=new currentgui();
+           cr.start(primaryStage);
+       });
+       Saving.setOnAction(ehh->{
+           new SavingGUI().start(primaryStage);
+       });
+     
+        
+    }
+
+   
+    
+}
+
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public abstract class Conventional implements Account, Serializable{
+    private String accountHolderName;
+    private String fatherName;
+    private String cellNumber;
+    private String CNIC;
+    private double balance;
+    private String Address;
+    private long accountNumber;
+    private String Profession;
+    private String email;
+    private String nationality;
+    private String income;
+    private String sourceOfIncome;
+    private String password;
+    private String accountType;
+    private ArrayList<Loans> loan = new ArrayList<>();
+    protected ArrayList<Transaction> transactionHistory=new ArrayList<>();
+    private Long lastUpdatedate=0L;
+    
+    Conventional(){}
+    Conventional(String name,String fname,String nmbr,String CNIC,String Address,long accountNumber,String profession,String email,String nationality,String income,String soincome,String password,String type){
+        this.accountHolderName=name;
+        this.fatherName=fname;
+        this.cellNumber=nmbr;
+        this.CNIC=CNIC;
+        this.Address=Address;
+        this.accountNumber=accountNumber;
+        this.email=email;
+        this.Profession=profession;
+        this.nationality=nationality;
+                this.income=income;
+                this.sourceOfIncome=soincome;
+                this.password=password;
+                this.accountType=type;
+    }
+    
+   public abstract void deposit(double amount);
+   public abstract boolean withDraw(double amount);
+   public abstract boolean transfer(double amount, long number);
+  
+  public void setPassword(String pass){
+       this.password=pass;
+   }
+   
+   void setLastUpdateDate(long date){
+       this.lastUpdatedate=date;
+   }
+   
+   long getLastUpdateDate(){
+       return this.lastUpdatedate;
+   }
+   
+   public String getFatherName(){
+       return fatherName;
+   }
+    
+  public String getsoincome(){
+       return this.sourceOfIncome;
+   }
+   
+  public String getNationality(){
+       return this.nationality;
+   }
+   
+   public String getIncome(){
+       return this.income;
+   }
+   
+   public String getType(){
+       return this.accountType;
+   }
+   
+   public String FName(){
+       return fatherName;
+   }
+   
+   public void setTransaction(Transaction c){
+    this.transactionHistory.add(c);
+}
+    public ArrayList<Transaction> getTransaction(){
+    return transactionHistory;
+}
+    void setAccountHolderName(String a){
+        this.accountHolderName=a;
+    }
+    
+  public  String getAccountHolderName(){
+        return this.accountHolderName;
+    }
+    
+    void setCellNumber(String b){
+        this.cellNumber=b;
+    }
+    
+   public String getCellNumber(){
+        return this.cellNumber;
+    }
+    
+    void setCNIC(String cnic){
+        this.CNIC=cnic;}
+    
+    
+    public String getCNIC(){
+        return this.CNIC;
+    }
+    
+    void setAddress(String a){
+        this.Address=a;
+    }
+    
+   public String getAddress(){
+        return this.Address;
+    }
+    
+    void setAccountNumber(long a){
+        this.accountNumber=a;
+    }
+    
+   public long getAccountNumber(){
+        return this.accountNumber;
+    }
+    
+    void setProfession(String a){
+        this.Profession=a;
+    }
+    
+    public String getProfession(){
+        return this.Profession;
+    }
+    
+    void setEmail(String a){
+        this.email=a;
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
+    void setBalance(double a){
+        this.balance=a;
+    }
+    
+   public double getBalance(){
+        return this.balance;
+    }
+    
+    public String getPassword(){
+        return this.password;
+    }
+    
+    void setAccountType(String type){
+        this.accountType=type;
+    }
+    
+    public String getAccountType(){
+        return this.accountType;
+    }
+    
+    public ArrayList<Loans> getLoans() { 
+        return loan; 
+    }
+    
+    public void addLoan(Loans loan) { 
+        this.loan.add(loan);
+    } 
+    public void loanApply(Loans loan){
+        this.loan.add(loan);
+    }
+    
+    
+    public static void saveAllAccounts(ArrayList<Conventional> list){
+        if( list == null || list.isEmpty()){
+            System.out.println("No account");
+            return;
+        }
+        try{
+            ObjectOutputStream  oos=new ObjectOutputStream(new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+            oos.writeObject(list);
+        }
+        catch(Exception ee){
+            System.out.println("Error in"+ee);
+        }
+    }
+    
+    public static void saveAccount(Conventional newAccount) {
+
+    ArrayList<Conventional> list = readData(); // Step 1: Read old data
+    list.add(newAccount);                        // Step 2: Add new data
+
+    try {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        oos.writeObject(list);                   // Step 3: Write full list again
+        oos.close();
+    } catch (Exception e) {
+        System.out.println("Error saving: " + e.getMessage());
+    }
+}
+   
+   
+   public static ArrayList<Conventional> readData() {
+    ArrayList<Conventional> list = new ArrayList<>();
+      
+
+    try {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        list = (ArrayList<Conventional>) ois.readObject();
+        ois.close();
+        return list;
+    } catch (Exception e) {
+        System.out.println("Error reading file"+e.getMessage());
+        return new ArrayList<>();
+    }
+    
+}
+
+   
+   
+   public static void updateAccount(Conventional updatedAccount) {
+    try {
+       
+        ArrayList<Conventional> allAccounts = Conventional.readData();
+
+      
+        for (int i = 0; i < allAccounts.size(); i++) {
+            if (allAccounts.get(i).getAccountNumber() == updatedAccount.getAccountNumber()) {
+                allAccounts.set(i, updatedAccount);
+                break;
+            }
+        }
+           // Write back the updated list
+        ObjectOutputStream oos = new ObjectOutputStream(
+            new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        oos.writeObject(allAccounts);
+        oos.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+        
+         public static void deleteAccount(Conventional Account) {
+    try {
+       
+        ArrayList<Conventional> allAccounts = Conventional.readData();
+
+      
+        for (int i = 0; i < allAccounts.size(); i++) {
+            if (allAccounts.get(i).getAccountNumber() == Account.getAccountNumber()) {
+                allAccounts.remove(i);
+                break;
+            }
+        }
+
+        // Write back the updated list
+        ObjectOutputStream oos = new ObjectOutputStream(
+            new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt"));
+        oos.writeObject(allAccounts);
+        oos.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+   }
+
+
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class CheckBalance extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+        
+
+    Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+
+    Button back=new Button("Back");
+        back.setPrefSize(100, 30);
+
+    back.setStyle("-fx-background-color: red");
+    
+    
+
+    
+    back.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+
+    Label Check=new Label("Your Current Balance :");
+    
+        TextField accField=new TextField(String.valueOf(PasswordCheck.getAccount().get(0).getBalance()));
+       
+        
+       HBox check=new HBox(10);
+       check.getChildren().addAll(Check,accField);
+       
+       VBox ch= new VBox (10);
+        ch.getChildren().addAll(Createroot,Check,accField,back);
+        
+        ch.setPrefSize(170, 30);
+        ch.setStyle("-fx-padding: 30; -fx-alignment: center");
+        
+        Scene sc=new Scene(ch,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+
+}
+        
+
+        /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+    
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+/**
+ *
+ * @author Ghazi Imam Computer  `
+ */
+public class BankingManagement {
+    //CurrentAccount c1=new CurrentAccount();
+    IslamicBanking i1=new IslamicBanking();
+    
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class applyforloan extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+       
+    Button backBtn = new Button("Back");
+
+            backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red");
+    backBtn.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+    Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+    
+    
+
+
+Label instruction=new Label("1. 6 Months 0% markup .\n" +
+"\n" +
+"2. . 6  to 12 Months 0% markup.\n" +
+"\n" +
+"3. 12  to 18 Months 0% markup.\n" +
+"\n" +
+"4. 12  to 18 Months 0% markup\n" +
+"\n" +
+"5. 18  to 24 Months 0% markup\n" +
+"\n" +
+"6. 24  to 36 Months 0% markup \n" +
+"\n" +
+"7. 36  to 48 Months 0% markup\n" +
+"\n"   );
+
+   Label lbb1=new Label("Enter Required Amount :");
+    TextField deposit1=new TextField();
+VBox vb1=new VBox(1);
+vb1.getChildren().addAll(lbb1,deposit1);
+Label ll=new Label(" -: Select Duration :-");
+ll.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; ");
+ComboBox<String> Duration=new ComboBox<>();
+Duration.getItems().addAll("0 - 6","6 - 12 ","12 - 18","18 - 24 ","24 - 36 ","36 - 48");
+Duration.setPrefSize(200, 30);
+Button apply=new Button("Apply");
+apply.setPrefSize(100, 30);
+
+    apply.setStyle("-fx-background-color: green");
+    apply.setOnAction(eer->{
+       Loans loan=new Loans(PasswordCheck.getAccount().get(0).getAccountHolderName(),PasswordCheck.getAccount().get(0).getAccountNumber(),Double.parseDouble(deposit1.getText()),Duration.getValue());
+        Conventional co=PasswordCheck.getAccount().get(0);
+        co.addLoan(loan);
+        Conventional.updateAccount(co);
+        
+        
+    });
+    
+VBox Dept=new VBox(15,Createroot,instruction,vb1,ll,Duration,apply,backBtn);
+Dept.setStyle("-fx-padding: 30; -fx-alignment: center");
+Scene sc=new Scene(Dept,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+}
+
+    
+
+    
+}
+
+
+package com.mycompany.bankingmanagementsystem;
+
+import static java.lang.System.exit;
+import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public class App extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        //startAutoUpdate();
+        
+        Label title = new Label("Welcome to United Bank Limited");
+        title.setFont(Font.font("Arial", 25));
+        title.setStyle("-fx-font-weight: bold; -fx-text-fill: #FFFFFF;");
+        title.setAlignment(Pos.CENTER);
+
+        // Next Button
+        Button next = new Button("Next");
+        next.setStyle(
+                "-fx-background-color: #1E90FF; " +  // Dodger Blue button
+                "-fx-text-fill: white; " +
+                "-fx-font-size: 16px; " +
+                "-fx-font-weight: bold; " +
+                "-fx-background-radius: 20;"       // Rounded corners
+        );
+        next.setPrefWidth(150);
+        next.setPrefHeight(40);
+
+        // VBox to hold the title and button
+        VBox vbox = new VBox(30, title, next); // 30 px spacing
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setPadding(new Insets(50));
+
+       
+        StackPane root = new StackPane(vbox);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+
+        Scene scene = new Scene(root, 500, 750);
+
+        stage.setTitle("United Bank Limited");
+        stage.setScene(scene);
+        stage.show();
+
+        // Button action
+        next.setOnAction(e -> {
+            new MainMenu().start(stage);
+        });
+    }
+   /* public void startAutoUpdate(){
+          ScheduledExecutorService schedular=Executors.newScheduledThreadPool(1);
+          
+         
+          Runnable task=()->{
+               
+               ArrayList<Conventional> accounts=Conventional.readData();
+               
+               if(accounts == null || accounts.isEmpty()){
+                   System.out.println("Empty");
+                   return;
+               }
+               boolean update=false;
+              for(Conventional acc : accounts){
+                  if(acc instanceof SavingAccount){
+                      ((SavingAccount) acc).applyInterest();
+                      update=true;
+                 }
+                  if(acc instanceof IslamicBanking){
+                      ((IslamicBanking) acc).ZakatApply();
+                      update=true;
+                  }
+              }
+              if(update){
+                  Conventional.saveAllAccounts(accounts);
+              System.out.println("Interest/Zakat has been Applied");}
+          };
+          
+          schedular.scheduleAtFixedRate(task, 0, 2, TimeUnit.MINUTES);
+        }*/
+
+    public static void main(String[] args) {
+        /*allAccounts a1=new allAccounts(12312,"Qaiser Nawaz");
+        allAccounts a2=new allAccounts(12345,"Ali Nawaz");
+        allAccounts a3=new allAccounts(67890,"Bilal Ahmed");
+        allAccounts a4=new allAccounts(23456,"Qasim Khan");
+        allAccounts.writeAccounts(a4);
+        allAccounts.writeAccounts(a1);
+        allAccounts.writeAccounts(a2);
+        allAccounts.writeAccounts(a3);*/
+        launch();
+       
+    }
+}
+
+package com.mycompany.bankingmanagementsystem;
+import java.util.ArrayList;
+import java.util.Timer;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
+
+public class allacounts extends Application {
+
+    @Override
+    public void start(Stage stage) {
+                   Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+        
+    Button backBtn = new Button("Back");
+        backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red;-fx-text-fill: white;");
+
+    
+    backBtn.setOnAction(e -> {
+        new menu2().start(stage);
+    });
+
+        TableView<Conventional> table = new TableView<>();
+        
+        TableColumn<Conventional, String> colName = new TableColumn<>("Account Holder Name");
+        colName.setCellValueFactory(new PropertyValueFactory<>("accountHolderName"));
+
+        TableColumn<Conventional, String> colFName = new TableColumn<>("Father Name");
+        colFName.setCellValueFactory(new PropertyValueFactory<>("fatherName"));
+        
+        TableColumn<Conventional, String> colNmbr = new TableColumn<>("Contact Number");
+        colNmbr.setCellValueFactory(new PropertyValueFactory<>("cellNumber"));
+        
+        TableColumn<Conventional, String> colCNIC = new TableColumn<>("CNIC");
+        colCNIC.setCellValueFactory(new PropertyValueFactory<>("CNIC"));
+        
+        TableColumn<Conventional, Double> colBalance = new TableColumn<>("Balance");
+        colBalance.setCellValueFactory(new PropertyValueFactory<>("balance"));
+        
+        TableColumn<Conventional, String> colAddress = new TableColumn<>("Address");
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        
+        TableColumn<Conventional, Long> colAcc = new TableColumn<>("Account Number");
+        colAcc.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+        
+        TableColumn<Conventional, String> colProfession = new TableColumn<>("Profession");
+        colProfession.setCellValueFactory(new PropertyValueFactory<>("Profession"));
+        
+        TableColumn<Conventional, String> colEmail = new TableColumn<>("Email");
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        
+        TableColumn<Conventional, String> colNation = new TableColumn<>("Nationality");
+        colNation.setCellValueFactory(new PropertyValueFactory<>("nationality"));
+        
+        
+        TableColumn<Conventional, String> colIncome = new TableColumn<>("Income");
+        colIncome.setCellValueFactory(new PropertyValueFactory<>("income"));
+        
+       TableColumn<Conventional, String> colType = new TableColumn<>("Account Type");
+        colType.setCellValueFactory(new PropertyValueFactory<>("accountType"));
+        
+        TableColumn<Conventional, String> colPass = new TableColumn<>("Password");
+        colPass.setCellValueFactory(new PropertyValueFactory<>("password"));
+        
+        
+table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+
+        table.getColumns().addAll(colName,colFName,colNmbr,colCNIC,colBalance,colAddress,colAcc,colProfession,colEmail,colNation,colIncome,colType,colPass);
+        ObservableList<Conventional> accounts = FXCollections.observableArrayList(
+                Conventional.readData()
+        );
+        Button applyInterestBtn= new Button("Apply Interest on Saving Accounts");
+        Button applyZakatbtn=new Button("Apply Zakat on Islamic Accounts");
+        
+        applyInterestBtn.setDisable(true);
+        applyInterestBtn.setPrefSize(150, 30);
+        applyZakatbtn.setDisable(true);
+        applyZakatbtn.setPrefSize(150, 30);
+        
+
+        table.setItems(accounts);
+
+        VBox root = new VBox(15,Createroot1,table,applyInterestBtn,applyZakatbtn,backBtn);
+
+        Scene scene = new Scene(root, 500, 300);
+        stage.setTitle("View All Bank Accounts");
+        stage.setScene(scene);
+        stage.show();
+        Timer timer = new Timer();
+timer.schedule(new TimerTask() {
+    @Override
+    public void run() {
+        Platform.runLater(() -> {
+            applyInterestBtn.setDisable(false);
+            applyZakatbtn.setDisable(false);
+        });
+    }
+}, 20_000); // 0.5 minutes
+    
+applyInterestBtn.setOnAction(e -> {
+    ArrayList<Conventional> allAccounts = Conventional.readData();
+    for (Conventional acc : allAccounts) {
+        if (acc instanceof SavingAccount) {
+            ((SavingAccount) acc).applyInterest();
+            Conventional.updateAccount(acc);
+        }
+    }
+    applyInterestBtn.setDisable(true); 
+});
+
+applyZakatbtn.setOnAction(e -> {
+    ArrayList<Conventional> allAccounts = Conventional.readData();
+    for (Conventional acc : allAccounts) {
+        if (acc instanceof IslamicBanking) {
+            ((IslamicBanking) acc).ZakatApply();
+           Conventional.updateAccount(acc);
+            System.out.println("zakat Apply");
+        }
+    }
+    applyZakatbtn.setDisable(true); // disable after applying
+});
+
+    }
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class allAccounts implements Serializable {
+    long number;
+    String name;
+    
+    private static ArrayList<allAccounts> all=allAccounts.readAccounts();
+    
+    public static void writeAccounts(allAccounts data){
+        ArrayList<allAccounts> list =  allAccounts.readAccounts();
+        list.add(data);
+        try{
+        ObjectOutputStream oos=new ObjectOutputStream(new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\allAccounts.txt"));
+        oos.writeObject(list);
+        oos.close();
+        }catch(Exception er){
+            System.out.println("Error in writing File "+er);
+        }
+        
+    }
+    
+    public static ArrayList<allAccounts> readAccounts(){
+        ArrayList<allAccounts> list=new ArrayList<>();
+        try{
+        ObjectInputStream ois=new ObjectInputStream(new FileInputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\allAccounts.txt"));
+       list=(ArrayList<allAccounts>) ois.readObject();
+       ois.close();
+        }catch(Exception e){
+            System.out.println("Error in reading "+e);
+        }
+        return list;
+    }
+    
+    allAccounts(long nmbr, String name){
+        this.name=name;
+        this.number=nmbr;
+    }
+    
+    void setNumber(long num){
+        this.number=num;
+    }
+    
+    void setName(String name){
+        this.name=name;
+    }
+    
+    String getname(){
+        return name;
+    }
+    
+    long getNumber(){
+        return number;
+    }
+    
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+
+package com.mycompany.bankingmanagementsystem;
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+/**
+ * JavaFX App
+ */
+public class adminGUI extends Application {
+
+    @Override
+    public void start(Stage stage) {
+            Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+                    Label Createtittle1=new Label("-: Log in :-");
+        Createtittle1.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; ");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle1);
+        BorderPane.setAlignment(Createtittle1, Pos.CENTER);
+        
+        Label la=new Label("Account No :");
+        TextField Accountn=new TextField();
+        Label laa=new Label("Password :");
+
+        TextField Passn=new TextField();
+        VBox vb1=new VBox(10);
+        vb1.getChildren().addAll(la,laa);
+        
+        VBox vb2=new VBox(5);
+        vb2.getChildren().addAll(Accountn,Passn);
+        HBox hb2=new HBox(5);
+        hb2.getChildren().addAll(vb1,vb2);
+        hb2.setStyle("-fx-padding: 30; -fx-alignment: center");
+
+
+
+        Button submit = new Button("Login");
+        submit.setPrefSize(55, 20);
+        VBox c=new VBox(1);
+        
+        c.getChildren().addAll(submit);
+        c.setStyle("-fx-padding: 3; -fx-alignment: center");
+        
+
+        Button backk = new Button("Back");
+        backk.setOnAction(eer->{
+            new MainMenu().start(stage);
+        });
+         VBox b=new VBox(1);
+        b.getChildren().addAll(backk);
+        b.setStyle("-fx-padding: 3; -fx-alignment: center");
+                backk.setPrefSize(55, 20);
+                backk.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                submit.setStyle("-fx-background-color: green;-fx-text-fill: white;");
+
+VBox Deptt=new VBox(5,Createroot1,Createroot,hb2,c,b);
+Deptt.setAlignment(Pos.CENTER);
+
+ StackPane root = new StackPane(Deptt);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+
+        Scene sc=new Scene(root,500,750);
+
+stage.setScene(sc);
+stage.show();
+        submit.setOnAction(e->
+        {
+       new menu2().start(stage);
+     
+        });
+
+        
+   
+    }
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public interface Account {
+    void deposit(double amount);
+    boolean withDraw(double amount);
+    boolean transfer(double amount,long number);
+    
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class withdraw extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+
+    Button backBtn = new Button("Back");
+
+    backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red");
+    backBtn.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+
+        Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+    Button bt=new Button("Send Now");
+    bt.setPrefSize(100, 30);
+
+    bt.setStyle("-fx-background-color: green");
+
+    Button back=new Button("Back");
+            
+
+    back.setStyle("-fx-background-color: red");
+    back.setPrefSize(100, 30);
+    
+    Label lbn=new Label("You have low balance");
+    lbn.setVisible(false);
+
+    
+    back.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+    TextField withdraw=new TextField();
+withdraw.setPrefSize(170, 30);
+HBox h2=new HBox(10,new VBox(new Label("Enter withdraw Amount"),withdraw));
+    h2.setStyle("-fx-padding: 30; -fx-alignment: center");
+
+VBox with=new VBox(15,Createtittle,h2,back,bt);
+    with.setStyle("-fx-padding: 30; -fx-alignment: center");
+
+Scene ss=new Scene(with,500,750);
+primaryStage.setScene(ss);
+primaryStage.show();
+    bt.setOnAction(f->
+{
+    Conventional co=PasswordCheck.getAccount().get(0);
+    co.withDraw(Double.parseDouble(withdraw.getText()));
+    Conventional.updateAccount(co);
+   if(co.getBalance()<Double.parseDouble(withdraw.getText())){
+       lbn.setVisible(true);
+   }
+   else{
+            Label Createtittle3=new Label(" United Bank Limited");
+        Createtittle3.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot3=new BorderPane();
+        Createroot3.setTop(Createtittle3);
+        BorderPane.setAlignment(Createtittle3, Pos.CENTER);
+   Label lbb=new Label("You Successfully WithDraw :");
+        VBox cen=new VBox(15,lbb);
+    cen.setStyle("-fx-padding: 3; -fx-alignment: center");
+
+      Label lbb1=new Label("Receipt Detail :");
+        VBox cen1=new VBox(15,lbb1);
+    cen1.setStyle("-fx-padding: 3; -fx-alignment: center");
+
+            Label lbb2=new Label("Withdraw Amount :");
+            
+            TextField deposit=new TextField(withdraw.getText());
+            deposit.setEditable(false);
+           Label date=new Label("Withdraw Date :");
+            TextField dp=new TextField(LocalDate.now().toString());
+            dp.setEditable(false);
+ 
+VBox Dept=new VBox(15,Createroot3,cen,cen1,lbb2,deposit,date,dp,backBtn);
+
+        Scene sc=new Scene(Dept,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+
+   }
+});
+}
+
+}
+
+package com.mycompany.bankingmanagementsystem;
+import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class viewloan extends Application {
+
+    /* Conventional findLoan(Loans loan){
+        for(Conventional i: Conventional.readData()){
+            if(i.getAccountNumber()==loan.getAccountNumber()){
+                return i;
+            }
+        }
+        return null;
+    }*/
+     ArrayList<Conventional> allAccounts;
+    @Override
+    public void start(Stage stage) {
+        this.allAccounts=Conventional.readData();
+                   Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+        
+    Button backBtn = new Button("Back");
+
+backBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+    
+    backBtn.setOnAction(e -> {
+        new menu2().start(stage);
+    });
+
+TableView<Loans> table = new TableView<>();
+
+TableColumn<Loans, String> colHolderName = new TableColumn<>("Name");
+colHolderName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+TableColumn<Loans, String> colAccNum = new TableColumn<>("Account Number");
+colAccNum.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+
+TableColumn<Loans, Double> colAmount = new TableColumn<>("Amount");
+colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+TableColumn<Loans, String> colAppliedDate = new TableColumn<>("Applied Date");
+colAppliedDate.setCellValueFactory(new PropertyValueFactory<>("appliedDate"));
+
+TableColumn<Loans, Integer> colDuration = new TableColumn<>("Duration (Months)");
+colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+
+TableColumn<Loans, String> colStatus = new TableColumn<>("Status");
+colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+TableColumn<Loans, Void> colAction=new TableColumn<>("Action");
+colAction.setCellFactory(ee-> new TableCell<>(){
+    Button approve=new Button("Approve");
+    Button reject=new Button("Reject");
+    
+    {
+        approve.setOnAction(ert->{
+            Loans loan=getTableView().getItems().get(getIndex());
+            if(loan==null)
+                return;
+            loan.setStatus("Approved");
+                Conventional ca=findLoanOwner(loan);
+                ca.deposit(loan.getAmount());
+            Conventional.saveAllAccounts(allAccounts);
+            reject.setDisable(true);
+                    approve.setDisable(true);
+            table.refresh();
+            
+        });
+        reject.setOnAction(er->{
+            Loans loan=getTableView().getItems().get(getIndex());
+            if(loan==null)
+                return;
+            loan.setStatus("Rejected");
+            Conventional caa=findLoanOwner(loan);
+                    Conventional.updateAccount(caa);
+                    reject.setDisable(true);
+                    approve.setDisable(true);
+                        table.refresh();
+            
+        });
+    }
+    protected void updateItem(Void item,boolean empty){
+        super.updateItem(item, empty);
+        if(empty)
+            setGraphic(null);
+        else{Loans loan = getTableView().getItems().get(getIndex());
+            if (loan.getStatus().equals("Approved") || loan.getStatus().equals("Rejected")) {
+                setGraphic(null); // hide buttons if already approved/rejected
+            }
+            else{
+        HBox box=new HBox(10,approve,reject);
+        setGraphic(box);
+    }}
+    }
+});
+
+
+    
+
+
+table.getColumns().addAll(colHolderName, colAccNum, colAmount, colAppliedDate, colDuration, colStatus,colAction);
+table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+ObservableList<Loans> Loan = FXCollections.observableArrayList();
+for(Conventional c1: allAccounts){
+    Loan.addAll(c1.getLoans());
+}
+table.setItems(Loan);
+
+
+
+//table.setItems(loans);
+
+VBox root = new VBox(10,Createroot1,table,backBtn);
+
+
+   
+
+        Scene scene = new Scene(root, 500, 750);
+        stage.setScene(scene);
+        stage.show();
+    }
+   private Conventional findLoanOwner(Loans loan) {
+    for (Conventional acc : allAccounts) {
+        if (acc.getAccountNumber() == loan.getAccountNumber() ) {
+            return acc;
+        }
+    }
+    return null;
+}
+    
+    
+
+  
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class Update extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+            Button backBtn = new Button("Back");
+                    backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red");
+    backBtn.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+        Label tittle=new Label(" United Bank Limited");
+        tittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane root=new BorderPane();
+        root.setTop(tittle);
+        BorderPane.setAlignment(    tittle, Pos.CENTER);
+        
+        Label phone=new Label("Enter Phone Number");
+        TextField phoneField=new TextField(PasswordCheck.getAccount().get(0).getCellNumber());
+        phoneField.setPrefSize(170, 30);
+       
+        
+        Label email=new Label("Enter Email");
+        TextField emailField=new TextField();
+        emailField.setPrefSize(170, 30);
+
+TextField name=new TextField(PasswordCheck.getAccount().get(0).getAccountHolderName());
+name.setPrefSize(200, 30);
+TextField fname=new TextField(PasswordCheck.getAccount().get(0).FName());
+fname.setPrefSize(200, 30);
+HBox h1=new HBox(10,new VBox(new Label("Name"),name),new VBox(new Label("Father Name"),fname));
+TextField Cnic=new TextField(PasswordCheck.getAccount().get(0).getCNIC());
+Cnic.setPrefSize(200, 30);
+TextField Ph=new TextField(phoneField.getText());
+Ph.setPrefSize(200, 30);
+HBox h2=new HBox(10,new VBox(new Label("CNIC"),Cnic),new VBox(new Label("Phone No"),Ph));
+TextField Account=new TextField(String.valueOf(PasswordCheck.getAccount().get(0).getAccountNumber()));
+Account.setPrefSize(200, 30);
+VBox v1=new VBox(new Label("Account No:"),Account);
+TextArea Address=new TextArea(PasswordCheck.getAccount().get(0).getAddress());
+Address.setPrefSize(200, 45);
+VBox v2=new VBox(new Label("Address :"),Address);
+TextField femail=new TextField(PasswordCheck.getAccount().get(0).getEmail());
+email.setPrefSize(200, 30);
+HBox h3=new HBox(10,new VBox(new Label("E-mail"),femail));
+
+TextField pas1f=new TextField(PasswordCheck.getAccount().get(0).getPassword());
+
+Button done=new Button("Submit");
+        done.setPrefSize(100, 30);
+
+    done.setStyle("-fx-background-color: green");
+Label error=new Label("Fill all the Fields");
+error.setStyle("-fx-text-field: red");
+error.setVisible(false);
+VBox form=new VBox(15,root,h1,h2,v1,v2,h3,new Label("Password"),pas1f,done,error,backBtn);
+form.setStyle("-fx-padding:20;"); 
+done.setOnAction(n->{
+    if(name.getText().isEmpty() || fname.getText().isEmpty()|| Cnic.getText().isEmpty()||Address.getText().isEmpty() || Account.getText().isEmpty() || femail.getText().isEmpty() || Ph.getText().isEmpty()){
+        System.out.println("Fill all the Fields");
+        error.setVisible(true);
+    }
+    
+    else{
+        System.out.println("run");
+        PasswordCheck.getAccount().get(0).setAccountHolderName(name.getText());
+        PasswordCheck.getAccount().get(0).setAccountNumber(Long.parseLong(Account.getText()));
+        PasswordCheck.getAccount().get(0).setCellNumber(pas1f.getText());
+        PasswordCheck.getAccount().get(0).setEmail(femail.getText());
+        PasswordCheck.getAccount().get(0).setCellNumber(Ph.getText());
+       PasswordCheck.getAccount().get(0).setAddress(Address.getText());
+        
+        Conventional.updateAccount(PasswordCheck.getAccount().get(0));
+        
+        Label in=new Label("Your Date has been successfully updated");
+        Button nn=new Button("Back");
+        
+        VBox vv=new VBox(5,in,nn);
+        vv.setAlignment(Pos.CENTER);
+        Scene cv=new Scene(vv,500,750);
+        primaryStage.setScene(cv);
+        primaryStage.show();
+        
+        nn.setOnAction(er->{
+            new menu().start(primaryStage);
+        });
+        
+    }
+});
+ScrollPane sp=new ScrollPane(form);
+Scene Scform=new Scene(sp,500,750);
+primaryStage.setScene(Scform);
+primaryStage.setTitle("Current Account");
+primaryStage.show();
+
+}
+
+    
+
+  
+}
+
+
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class Transfer extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+        
+    Button backBtn = new Button("Back");
+        backBtn.setPrefSize(100, 30);
+
+    backBtn.setStyle("-fx-background-color: red");
+    
+    backBtn.setOnAction(e -> {
+        new menu().start(primaryStage);
+    });
+    Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+    Button bt=new Button("Send Now");
+       
+        bt.setPrefSize(100, 30);
+    bt.setStyle("-fx-background-color: green");  
+
+   
+   
+Label Amount=new Label("Enter Amount");
+        TextField AmountField=new TextField();
+        AmountField.setPrefSize(170, 30);
+        AmountField.setVisible(false);
+                bt.setVisible(false);
+                Amount.setVisible(false);
+                Label nam=new Label("Name");
+               TextField name=new TextField();
+                name.setEditable(false);
+                
+    
+  
+    Label acc=new Label("Enter Account Number");
+        TextField accField=new TextField();
+        accField.setPrefSize(170, 30);
+        Button next=new Button("Next");
+        next.setOnAction(ef->{
+            if(new PasswordCheck().transfer(Long.parseLong(accField.getText()))==true){
+                nam.setVisible(true);
+                AmountField.setVisible(true);
+                bt.setVisible(true);
+                Amount.setVisible(true);
+               
+        name.setText(PasswordCheck.getAll().get(0).getname());}
+            else{
+        name.setText("No Account Found");
+               
+            }
+        });
+        
+        Label er=new Label("You have Low Balance");
+        er.setVisible(false);
+                VBox accAmount=new VBox(10);
+        accAmount.setPadding(new Insets(10));
+        accAmount.getChildren().addAll(Createtittle,acc,accField,next,name,Amount,AmountField,bt,backBtn);
+        
+        accAmount.setPrefSize(170, 30);
+        accAmount.setStyle("-fx-padding: 30; -fx-alignment: center");
+        
+        Scene sc=new Scene(accAmount,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+bt.setOnAction(f->
+{
+    Conventional co=PasswordCheck.getAccount().get(0);
+    if(co.transfer(Double.parseDouble(AmountField.getText()),Long.parseLong(accField.getText()))){
+    Conventional.updateAccount(co);
+  
+                Label Createtittle3=new Label(" United Bank Limited");
+        Createtittle3.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot3=new BorderPane();
+        Createroot3.setTop(Createtittle3);
+        BorderPane.setAlignment(Createtittle3, Pos.CENTER);
+   Label lbb=new Label("Transaction SuccessFull");
+        VBox cen=new VBox(15);
+        cen.getChildren().addAll(lbb);
+    cen.setStyle("-fx-padding: 3; -fx-alignment: center");
+
+      Label lbb1=new Label("Receipt Detail :");
+        VBox cen1=new VBox(15,lbb1);
+                cen1.getChildren().addAll(lbb);
+
+    cen1.setStyle("-fx-padding: 3; -fx-alignment: center");
+
+            Label lbb2=new Label("Transfer Amount :");
+            
+            
+            TextField deposit=new TextField(AmountField.getText());
+            deposit.setEditable(false);
+            deposit.setPrefSize(170, 30);
+            
+            
+            TextField trans=new TextField(accField.getText());
+            deposit.setEditable(false);
+            deposit.setPrefSize(170, 30);
+            
+           Label date=new Label("Transfer Date :");
+            TextField dp=new TextField(LocalDate.now().toString());
+            dp.setPrefSize(170, 30);
+            
+            
+
+VBox Dept=new VBox(15,Createroot3,cen,cen1,lbb2,deposit,new Label("Reciever Account"),trans,date,dp,backBtn);
+
+        Scene scc=new Scene(Dept,500,750);
+
+primaryStage.setScene(scc);
+primaryStage.show();}
+      else{
+        showAlert("Low Balance","You Have low Balance");
+        
+    }
+
+});
+}
+private void showAlert(String title, String msg) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(title);
+    alert.setContentText(msg);
+    alert.showAndWait();
+}}
+        
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class Transaction implements Serializable  {
+    private String type;
+    private double amount;
+    private double balance;
+    private String dateTime;
+    private long reciepentNumber;
+    
+    Transaction(String type,double amount,double balance){
+        this.type=type;
+        this.amount=amount;
+        this.balance=balance;
+        this.dateTime=LocalDateTime.now().toString();
+    }
+    
+    Transaction(String type,double amount,double balance,long num){
+        this.type=type;
+        this.amount=amount;
+        this.balance=balance;
+        this.dateTime=LocalDateTime.now().toString();
+        this.reciepentNumber=num;
+    }
+
+    public long getReciepentNumber(){
+        return this.reciepentNumber;
+    }
+    
+    public String getType() {
+        return type;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+}
+
+
+package com.mycompany.bankingmanagementsystem;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class searchaccounts extends Application {
+
+    @Override
+    public void start(Stage stage) {
+                   Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+        
+    Button backBtn = new Button("Back");
+
+backBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+    
+    backBtn.setOnAction(e -> {
+        new menu2().start(stage);
+    });
+
+
+Label title = new Label("Search Account");
+title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+
+TextField AccNumber = new TextField();
+AccNumber.setPromptText("Enter Account Number");
+
+Button btnSearch = new Button("Search");
+btnSearch.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+btnSearch.setOnAction(eer->{
+    if(new PasswordCheck().serchAccount(Long.parseLong(AccNumber.getText()))==true){
+        Conventional c=PasswordCheck.getAccount().get(0);
+       
+                   Label Createtittle1=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle1, Pos.CENTER);
+        Createroot.setPadding(new Insets(10));
+        
+    Button bckBtn = new Button("Back");
+
+bckBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+    
+    bckBtn.setOnAction(e -> {
+        new menu2().start(stage);
+    });
+
+
+TextField Name = new TextField(c.getAccountHolderName());
+Name.setEditable(false);
+
+TextField cnic = new TextField(c.getCNIC());
+cnic.setEditable(false);
+
+TextField nmbr = new TextField(c.getCNIC());
+nmbr.setEditable(false);
+
+TextField Balance = new TextField(String.valueOf(c.getBalance()));
+Balance.setEditable(false);
+
+
+
+
+
+
+VBox root1 = new VBox(5);
+root1.setPadding(new Insets(20));
+root1.getChildren().addAll(Createroot, new Label("Account Holder Name"),Name, new Label("Balance"),Balance,new Label("CNIC"),cnic,new Label("Phone Number"),nmbr, backBtn);
+
+   
+
+        Scene scenee = new Scene(root1, 500, 750);
+        stage.setScene(scenee);
+        stage.show();
+    }
+       
+        
+    }
+);
+
+
+TextField Name = new TextField();
+Name.setPromptText("Account Holder Name");
+Name.setEditable(false);
+
+TextField Balance = new TextField();
+Balance.setPromptText("Balance");
+Balance.setEditable(false);
+
+Label msg = new Label();
+VBox root = new VBox(15);
+root.setPadding(new Insets(20));
+root.getChildren().addAll(Createroot1,title, AccNumber, btnSearch, backBtn);
+
+   
+
+        Scene scene = new Scene(root, 500, 750);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+   
+}
+
+
+
+     
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.layout.*;
+
+
+/**
+ * JavaFX App
+ */
+public class SavingGUI extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        
+        
+        Label phone=new Label("Enter Phone Number");
+        TextField phoneField=new TextField();
+        phoneField.setPrefSize(170, 30);
+       
+        
+        Label email=new Label("Enter Email");
+        TextField emailField=new TextField();
+        emailField.setPrefSize(170, 30);
+        
+        Button ok=new Button("Send OTP");
+        Label otp=new Label("Enter OTP");
+        TextField otpField=new TextField();
+        Button submit=new Button("Submit");
+        submit.setVisible(false);
+        otp.setVisible(false);
+        otpField.setVisible(false);
+        Label pas1=new Label("Enter new Password");
+        Label pas2=new Label("Confirm your Password");
+        PasswordField pas1f=new PasswordField();
+        PasswordField pas2f=new PasswordField();
+        Button done1=new Button("Done");
+        done1.setStyle("-fx-background-color: navy; -fx-text-fill: white");
+        pas1.setVisible(false);
+        pas2.setVisible(false);
+        pas1f.setVisible(false);
+        pas2f.setVisible(false);
+        done1.setVisible(false);
+        Label error1=new Label("Password Could not Match");
+        error1.setVisible(false);
+          Button back1=new Button("Back");
+        back1.setPrefSize(130, 30);
+        back1.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back1.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        VBox phoneEmail=new VBox(2);
+        phoneEmail.setPadding(new Insets(10));
+        phoneEmail.getChildren().addAll(phone,phoneField,email,emailField,ok,otp,otpField,submit,pas1,pas1f,pas2,pas2f,done1,back1,error1);
+        
+       
+        
+        
+        ok.setOnAction(e->{
+            if(phoneField.getText().isEmpty()||emailField.getText().isEmpty() ){
+                System.out.println("Fill all Fields");
+            }else{
+            otp.setVisible(true);
+            otpField.setVisible(true);
+            submit.setVisible(true);
+        }});
+        
+        Scene login=new Scene(phoneEmail,500,750);
+        primaryStage.setTitle("Login Page");
+        primaryStage.setScene(login);
+        primaryStage.show();
+        
+        submit.setOnAction(er->{
+           if((new PasswordCheck().otp(otpField.getText()))==true){
+           pas1.setVisible(true);
+        pas2.setVisible(true);
+        pas1f.setVisible(true);
+        pas2f.setVisible(true);
+        done1.setVisible(true);}
+            
+        });
+        
+        done1.setOnAction(ee->{
+       if(pas1f.getText().equals(pas2f.getText())){
+        
+Label instruction=new Label("1. I confirm that all information I provide is true and correct.\n" +
+"\n" +
+"2. I agree that providing false information may lead to rejection of my application.\n" +
+"\n" +
+"3. I agree to follow all rules and policies of the bank.\n" +
+"\n" +
+"4. I agree that the bank may verify my identity and documents.\n" +
+"\n" +
+"5. I will inform the bank immediately if my personal details change.\n" +
+"\n" +
+"6. I agree that the bank may contact me for verification if needed.\n" +
+"\n" +
+"7. I agree that my account must not be used for illegal activities.\n" +
+"\n" +
+"8. I agree to keep my account login and PIN secure.\n" +
+"\n" +
+"9. I agree to all terms and conditions of account creation.\n"  );
+CheckBox check=new  CheckBox("✔ After reading these instructions, click “I Agree” to continue");
+Button agree=new Button("I Agree");
+agree.setVisible(false);
+check.setOnAction(e->{
+    agree.setVisible(check.isSelected());
+}
+);
+VBox InsPage=new VBox(5,instruction,check,agree);
+Scene s=new Scene(InsPage,500,750);
+primaryStage.setScene(s);
+primaryStage.show();
+
+agree.setOnAction(e->
+{
+ Label tittle=new Label(" United Bank Limited");
+        tittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane root=new BorderPane();
+        root.setTop(tittle);
+        BorderPane.setAlignment(    tittle, Pos.CENTER);
+TextField name=new TextField();
+name.setPrefSize(200, 30);
+TextField fname=new TextField();
+
+fname.setPrefSize(200, 30);
+HBox h1=new HBox(10,new VBox(new Label("Name"),name),new VBox(new Label("Father Name"),fname));
+
+TextField Cnic=new TextField();
+Cnic.setPrefSize(200, 30);
+
+TextField Ph=new TextField(phoneField.getText());
+Ph.setEditable(false);
+Ph.setPrefSize(200, 30);
+HBox h2=new HBox(10,new VBox(new Label("CNIC"),Cnic),new VBox(new Label("Phone No"),Ph));
+
+TextField Account=new TextField(String.valueOf(generateAccountNumber.number()));
+Account.setPrefSize(200, 30);
+Account.setEditable(false);
+VBox v1=new VBox(new Label("Account No:"),Account);
+
+TextArea Address=new TextArea();
+Address.setPrefSize(200, 45);
+VBox v2=new VBox(new Label("Address :"),Address);
+
+ComboBox<String> Profession=new ComboBox<>();
+Profession.getItems().addAll("Student","Government Job","Private Job","Bussiness","Others");
+Profession.setPrefSize(200, 30);
+
+TextField femail=new TextField(emailField.getText());
+femail.setEditable(false);
+email.setPrefSize(200, 30);
+HBox h3=new HBox(10,new VBox(new Label("Profession"),Profession),new VBox(new Label("E-mail"),femail));
+
+ComboBox<String> Income=new ComboBox<>();
+Income.getItems().addAll("10K to 50K","60K to 100K","110K to 200K","210K to 300K","310K to 500K","510K or Above");
+Income.setPrefSize(200, 30);
+
+ComboBox<String> Residiental=new ComboBox<>();
+Residiental.getItems().addAll("Pakistani","Non-Pakistani");
+Residiental.setPrefSize(200, 30);
+HBox v3=new HBox(10,new VBox(new Label("Residiental Status"),Residiental),new VBox(new Label("Income"),Income));
+
+ComboBox<String> SourceOfIncome=new ComboBox<>();
+SourceOfIncome.getItems().addAll("Parents","Siblings","Own","Others");
+SourceOfIncome.setPrefSize(200, 30);
+Button done=new Button("Submit");
+VBox v4=new VBox(new Label("Source Of Income"),SourceOfIncome);
+Label error=new Label("Fill all the Fields");
+error.setStyle("-fx-text-field: red");
+error.setVisible(false);
+
+  Button back=new Button("Back");
+        back.setPrefSize(130, 30);
+        back.setStyle("-fx-background-color: red; -fx-text-fill: white");  
+        back.setOnAction(ei->{
+            new MainMenu().start(primaryStage);
+        });
+
+VBox form=new VBox(15,root,h1,h2,v1,v2,h3,v3,v4,done,back,error);
+form.setStyle("-fx-padding:20;"); 
+done.setOnAction(n->{
+    if(name.getText().isEmpty() || fname.getText().isEmpty()|| Cnic.getText().isEmpty()||Address.getText().isEmpty() || Account.getText().isEmpty() || Profession.getValue().isEmpty() ||  emailField.getText().isEmpty()|| Residiental.getValue().isEmpty()||SourceOfIncome.getValue().isEmpty()){
+        System.out.println("Fill all the Fields");
+        error.setVisible(true);
+    }
+    
+    else{
+        System.out.println("run");
+        SavingAccount ca=new SavingAccount(name.getText(),fname.getText(),phoneField.getText(),Cnic.getText(),Address.getText(),Long.parseLong(Account.getText()),Profession.getValue(),emailField.getText(),Residiental.getValue(),Income.getValue(),SourceOfIncome.getValue(),pas1f.getText());
+        System.out.println(ca.getAccountHolderName());
+        Conventional.saveAccount(ca);
+        
+        Label in=new Label("Your Create an account Successfully");
+        Button nn=new Button("Back");
+        
+        VBox vv=new VBox(5,in,nn);
+        vv.setAlignment(Pos.CENTER);
+        Scene cv=new Scene(vv,500,750);
+        primaryStage.setScene(cv);
+        primaryStage.show();
+        
+        nn.setOnAction(er->{
+            new MainMenu().start(primaryStage);
+        });
+        
+        
+    }
+});
+
+
+ScrollPane sp=new ScrollPane(form);
+Scene Scform=new Scene(sp,500,750);
+
+primaryStage.setScene(Scform);
+primaryStage.setTitle("Current Account");
+primaryStage.show();
+});
+InsPage.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+instruction.setStyle("-fx-padding: 30; -fx-alignment: center; ");
+
+
+    }
+       else{
+           error1.setVisible(true);
+       }});
+        }}
+        
+    
+        
+        
+       /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class SavingAccount extends Conventional implements Serializable {
+    private String AccountType="Saving Account";
+    SavingAccount(String name,String fname,String nmbr,String CNIC,String Address,long accountNumber,String profession,String email,String nationality,String income,String soincome,String pass){
+    super(name,fname,nmbr,CNIC,Address,accountNumber,profession,email,nationality,income,soincome,pass,"Saving Account");
+    }
+    private double interest;
+    
+    
+      void writeData(ArrayList<SavingAccount> act){
+       FileOutputStream fos=null;
+       ObjectOutputStream oos=null;
+       
+     try{
+           fos=new FileOutputStream("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\Accounts.txt");
+           oos=new ObjectOutputStream(fos);
+           oos.writeObject(act);
+           oos.close();
+           fos.close();
+       }
+       catch(Exception e){
+           System.out.println(e);
+       }
+      }
+    
+       @Override
+public void deposit(double amount){
+    if(amount > 0){
+        this.setBalance(this.getBalance() + amount);
+        this.setTransaction(new Transaction ("Deposit", amount, this.getBalance()));
+        System.out.println("Deposit successful: " + amount);
+    } else {
+        System.out.println("Please enter a valid amount");
+    }
+}
+
+    
+    public boolean withDraw(double amount){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Withdraw",amount,this.getBalance()));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+    
+   
+    
+    
+   public String getAccountDetails(){
+        return "Account Number : "+this.getAccountNumber()+"\nAccount Holder : "+this.getAccountHolderName()+"\nAccount Type : Current Account\nBalance : "+this.getBalance();
+    }
+   
+    public boolean transfer(double amount,long number){
+        if(this.getBalance()>=amount){
+        this.setBalance(this.getBalance()-amount);
+        this.setTransaction(new Transaction("Transfer",amount,this.getBalance(),number));
+        return true;}
+        else{
+            System.out.println("You have insufficant Balance");
+            return false;
+        }
+    }
+   
+   
+   void applyInterest(){ 
+       long now=System.currentTimeMillis();
+       if(this.getLastUpdateDate()==0L || now-System.currentTimeMillis()>180000){
+           if(this.getBalance()>=50000){
+       this.interest=this.getBalance()*0.10;
+       this.setBalance(this.getBalance()+interest);
+       this.setTransaction(new Transaction("Interest Added",this.interest,this.getBalance()));
+       this.setLastUpdateDate(System.currentTimeMillis());}
+   }}
+    
+}
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class PrintStatement1 extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+
+        
+        Conventional co = PasswordCheck.getAccount().get(0);
+
+  
+        TableView<Transaction> table = new TableView<>();
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+    
+        TableColumn<Transaction, String> typeCol = new TableColumn<>("Transaction Type");
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+        TableColumn<Transaction, Double> amountCol = new TableColumn<>("Amount");
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        TableColumn<Transaction, Double> balanceCol = new TableColumn<>("Balance");
+        balanceCol.setCellValueFactory(new PropertyValueFactory<>("balance"));
+
+        TableColumn<Transaction, LocalDate> dateCol = new TableColumn<>("Transaction Date");
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+        
+        TableColumn<Transaction, Long> accountCol = new TableColumn<>("Reciepent Account Number");
+        accountCol.setCellValueFactory(new PropertyValueFactory<>("reciepentNumber"));
+
+        table.getColumns().addAll(typeCol, amountCol, balanceCol, dateCol,accountCol);
+
+
+        ObservableList<Transaction> transactions =
+                FXCollections.observableArrayList(co.getTransaction());
+        table.setItems(transactions);
+
+        table.refresh();
+
+
+        Button backBtn = new Button("Back");
+        backBtn.setOnAction(e -> new menu().start(primaryStage));
+
+
+        VBox layout = new VBox(15, new Label("Transaction History"), table, backBtn);
+        layout.setPadding(new Insets(20));
+        layout.setAlignment(Pos.CENTER);
+        VBox.setVgrow(table, javafx.scene.layout.Priority.ALWAYS); 
+
+        Scene scene = new Scene(layout, 500, 750);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Transaction Statement");
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class PasswordCheck {
+    private static ArrayList<Conventional> data=new ArrayList<>();
+    private static ArrayList<allAccounts> all=new ArrayList<>();
+
+    boolean otp(String pass) {
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\Semester 02\\OOPS\\BankingManagementSystem\\src\\main\\java\\com\\mycompany\\bankingmanagementsystem\\file\\otps.txt"))) {
+
+            String line;
+            
+
+            while ((line = br.readLine()) != null) {
+               
+                if (line.trim().equals(pass)) {
+                    System.out.println("match");
+                    return true;    
+                    
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        System.out.println("Invalid OTP");
+        return false;  
+    }
+    
+    boolean transfer(long account){
+        all.clear();
+        ArrayList<allAccounts> list=allAccounts.readAccounts();
+        
+        try{
+            for(allAccounts a: list){
+                if(a.getNumber()==account){
+                    all.add(a);
+                    return true;
+                }
+            }
+        }catch(Exception er){
+            System.out.println("Error in "+er);
+        }
+        return false;
+    }
+    
+    
+    boolean serchAccount(long account){
+        data.clear();
+        ArrayList<Conventional> ac=Conventional.readData();
+        for(Conventional t:ac){
+            if(t.getAccountNumber()==account){
+                data.add(t);
+                System.out.println("Match");
+                return true;
+            }
+            
+            
+        }System.out.println("No Match");
+        return false;
+    }
+    
+    
+    
+    
+     boolean password(long account,String pass){
+         data.clear();
+        
+             ArrayList<Conventional> ar1=Conventional.readData();
+             for(Conventional i: ar1){
+                 if(i.getAccountNumber()==account &&pass.equals(i.getPassword())){
+                     data.add(i);
+                     return true;
+                 }
+             
+         }
+             System.out.println("Invalid Password");
+             return false;  
+     }
+     
+     boolean reset(String data){
+         this.data.clear();
+         ArrayList<Conventional> dta=Conventional.readData();
+         for(Conventional tt: dta){
+             if((tt.getCellNumber().equals(data)) || (tt.getEmail().equals(data))){
+             this.data.add(tt);
+             return true;
+         }
+         }
+         System.out.println("Data not found");
+         return false;
+     }
+     
+     public static ArrayList<Conventional> getAccount(){
+         return data;   }
+     
+     public static ArrayList<allAccounts> getAll(){
+         return all;
+     }
+     
+}
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+
+package com.mycompany.bankingmanagementsystem;
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+/**
+ * JavaFX App
+ */
+public class menu2 extends Application {
+
+    @Override
+    public void start(Stage stage) {
+            Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(5));
+    
+            Label Createtittle1=new Label(" Admin Menu ");
+        Createtittle1.setStyle("-fx-font-size: 20px; -fx-font-weight:bold;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle1);
+        BorderPane.setAlignment(Createtittle1, Pos.CENTER);
+     
+        
+        Button btn =new Button("View All Acounts");
+        btn.setPrefSize(170, 30);
+        btn.setStyle("-fx-background-color: #90EE90;");
+        btn.setOnAction(e->
+        {
+                           new allacounts().start(stage);
+ 
+        });
+        
+                Button btn1 =new Button("Search Account");
+        btn1.setPrefSize(170, 30);
+        btn1.setStyle("-fx-background-color: #90EE90");
+        btn1.setOnAction(e->
+        {
+                           new searchaccounts().start(stage);
+ 
+        });
+        
+                 Button btn2 =new Button("Delete Account");
+        btn2.setPrefSize(170, 30);
+        btn2.setStyle("-fx-background-color: #90EE90");
+        btn2.setOnAction(e->
+        {
+                           new deleteaccount().start(stage);
+ 
+        });
+        
+        
+                         Button btn3 =new Button("View All Loans");
+        btn3.setPrefSize(170, 30);
+        btn3.setStyle("-fx-background-color: #90EE90");
+        btn3.setOnAction(e->
+        {
+                           new viewloan().start(stage);
+ 
+        });
+        
+        Button backBtn = new Button("Back");
+        backBtn.setOnAction(et->{
+            new MainMenu().start(stage);
+        });
+        backBtn.setPrefSize(100, 30);
+backBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+        backBtn.setOnAction(e -> 
+{
+ new adminGUI().start(stage);
+    });
+                VBox v=new VBox(15,Createroot1,Createroot,btn,btn1,btn2,btn3,backBtn);
+        v.setStyle("-fx-padding: 30; -fx-alignment: center");
+         StackPane root = new StackPane(v);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+        Scene sc=new Scene(root,500,750);
+
+stage.setScene(sc);
+stage.show();
+
+
+        
+   
+    }
+
+      
+    
+
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class menu extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+                Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 35px; -fx-font-weight: bold; -fx-text-fill: white;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+            Button btn = new Button("Deposit");
+            btn.setPrefSize(170, 30);
+            btn.setStyle("-fx-background-color: #ADD8E6");
+            btn.setOnAction(ee->{
+                new deposit().start(primaryStage);
+            }
+            );
+    Button btn1=new Button("Withdraw");
+                btn1.setPrefSize(170, 30);
+                btn1.setStyle("-fx-background-color: #ADD8E6");
+
+    btn1.setOnAction(e->
+    {
+        
+        new withdraw().start(primaryStage);
+    });
+    Button btn2=new Button("Transfer Now ");
+                btn2.setPrefSize(170, 30);
+                btn2.setStyle("-fx-background-color: #ADD8E6");
+
+    btn2.setOnAction(e->
+    {
+        new Transfer().start(primaryStage);
+    });
+   Button btn3 = new Button("Check Balance");
+               btn3.setPrefSize(170, 30);
+               btn3.setStyle("-fx-background-color: #ADD8E6");
+
+   btn3.setOnAction(h->
+   {
+       new CheckBalance().start(primaryStage);
+   });
+    Button btn4 = new Button("Print Statement");
+                btn4.setPrefSize(170, 30);
+                btn4.setStyle("-fx-background-color: #ADD8E6");
+
+
+    btn4.setOnAction(j->
+    {
+        new PrintStatement1().start(primaryStage);
+    });
+     Button btn5 = new Button("Apply for Loan");
+                 btn5.setPrefSize(170, 30);
+                                btn5.setStyle("-fx-background-color: #ADD8E6");
+
+
+     btn5.setOnAction(t->
+     {
+         new applyforloan().start(primaryStage);
+     });
+      Button btn6 = new Button("View Loan Status");
+                  btn6.setPrefSize(170, 30);
+                  btn6.setStyle("-fx-background-color: #ADD8E6");
+
+btn6.setOnAction(eef->{
+    new loanstatus().start(primaryStage);
+});
+       Button btn7 = new Button("Update Details");
+                   btn7.setPrefSize(170, 30);
+                   btn7.setStyle("-fx-background-color: ADD8E6");
+
+                   btn7.setOnAction(g->
+                   {
+                       new Update().start(primaryStage);
+                   });
+
+        Button btn8 = new Button("Logout");
+                    btn8.setPrefSize(170, 30);
+                     btn8.setStyle("-fx-background-color: #ADD8E6");
+                     btn8.setOnAction(eerr->{
+                         new MainMenu().start(primaryStage);
+                     });
+
+
+        VBox v=new VBox(15,Createroot1,btn,btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8);
+        v.setStyle("-fx-padding: 30; -fx-alignment: center");
+         StackPane root = new StackPane(v);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+        Scene scene = new Scene(root, 500, 750);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        
+     
+    }
+
+  
+    
+}
+
+package com.mycompany.bankingmanagementsystem;
+
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+/**
+ * JavaFX App
+ */
+public class MainMenu extends Application {
+
+    @Override
+    public void start(Stage stage) {
+        double height=30;
+        double width=170;
+        Label tittle=new Label("Welcome to United Bank Limited");
+        tittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;");
+    
+        
+        BorderPane root=new BorderPane();
+        root.setTop(tittle);
+        
+        BorderPane.setAlignment(tittle, Pos.CENTER);
+       
+        
+        
+        Label option=new Label("Choose an option");
+        Button Create=new Button("Create an Account");                                 //Create an Account Button
+        Create.setPrefSize(width, height);                                   
+        
+        //If User press Create an account then this will happen
+        Create.setOnAction(e->{
+            Button Conventional=new Button("Conventional Banking");                       //Conventional Banking Button under Create
+            Conventional.setPrefSize(width, height);
+            //If user Click on Conventional banking then this will happen
+            Conventional.setOnAction(a->{
+                
+        ConventionalGui g=new ConventionalGui();
+        g.start(stage);
+            });
+            
+            
+            
+              Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white;");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+            
+            Button Islamic=new Button("Islamic Banking");
+            Islamic.setPrefSize(width, height);
+            Button exitCreate=new Button("Back");
+            exitCreate.setPrefSize(width, height);
+            exitCreate.setOnAction(eer->{
+                new MainMenu().start(stage);
+            });
+            Islamic.setOnAction(ee->{
+                new IslamicGUI().start(stage);
+            });
+            
+            VBox CreateBox=new VBox(5);
+            CreateBox.setPadding(new Insets(10));
+            CreateBox.getChildren().addAll(Createroot,Conventional,Islamic,exitCreate);
+             StackPane root4 = new StackPane(CreateBox);
+        root4.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+            Scene CreateSc=new Scene(root4,500,750);
+            stage.setScene(CreateSc);
+            stage.show();
+        });
+        Button user=new Button("Login as a User");                                         //Login as a User Button
+        user.setPrefSize(width, height);
+        user.setOnAction(eee->{
+            new Login().start(stage);
+        });
+        
+            Button admin=new Button("Login as a Admin");                                         //Login as a Admin Button
+        admin.setPrefSize(width, height);
+        admin.setOnAction(eee->{
+            new adminGUI().start(stage);
+        });
+        
+          Button exit=new Button("Exit");
+       exit.setPrefSize(170, 30);
+       exit.setOnAction(eh->{
+           stage.close();
+       });
+       
+        
+         VBox finalBox=new VBox(5);
+        finalBox.setPadding(new Insets(10));
+        finalBox.getChildren().addAll(root,option,Create,user,admin,exit);
+         StackPane root2 = new StackPane(finalBox);
+        root2.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+        
+        Scene sc=new Scene(root2,500,750);
+        stage.setScene(sc);
+        stage.show();
+    }
+
+}
+
+package com.mycompany.bankingmanagementsystem;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMain.java to edit this template
+ */
+
+import java.time.LocalDate;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ *
+ * @author Dell
+ */
+public class Login extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) {
+        Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: white;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+            Label Createtittle1=new Label("-: Log in :-");
+        Createtittle1.setStyle("-fx-font-size: 15px; -fx-font-weight: bold; ");
+        BorderPane Createroot=new BorderPane();
+        Createroot.setTop(Createtittle1);
+        BorderPane.setAlignment(Createtittle1, Pos.CENTER);
+        
+        Label la=new Label("Account No :");
+        TextField Accountn=new TextField();
+        Label laa=new Label("Password :");
+
+        PasswordField Passn=new PasswordField();
+        VBox vb1=new VBox(10);
+        vb1.getChildren().addAll(la,laa);
+        
+        VBox vb2=new VBox(5);
+        vb2.getChildren().addAll(Accountn,Passn);
+        HBox hb2=new HBox(5);
+        hb2.getChildren().addAll(vb1,vb2);
+        hb2.setStyle("-fx-padding: 30; -fx-alignment: center");
+
+
+
+        Button submit = new Button("Login");
+        submit.setOnAction(ev->{
+            if((new PasswordCheck().password(Long.parseLong(Accountn.getText()), Passn.getText()))==true){
+                System.out.println("Login");
+                new menu().start(primaryStage);
+            };
+        });
+        
+        Button forget=new Button("Forget Password");
+        forget.setPrefSize(130, 20);
+        
+        forget.setOnAction(er->{
+           new forgetPass().start(primaryStage);
+        });
+       
+        
+        submit.setPrefSize(100, 20);
+        HBox c=new HBox(10);
+        
+        c.getChildren().addAll(submit,forget);
+        c.setStyle("-fx-padding: 1; -fx-alignment: center");
+        
+
+        Button backk = new Button("Back");
+        backk.setOnAction(ee->{
+            new MainMenu().start(primaryStage);
+        });
+         VBox b=new VBox(1);
+        b.getChildren().addAll(backk);
+        b.setStyle("-fx-padding: 1; -fx-alignment: center");
+                backk.setPrefSize(60, 20);
+                backk.setStyle("-fx-background-color: red");
+                submit.setStyle("-fx-background-color: green");
+
+VBox Deptt=new VBox(5,Createroot1,Createroot,hb2,c,b);
+Deptt.setAlignment(Pos.CENTER);
+ StackPane root = new StackPane(Deptt);
+        root.setStyle(
+                "-fx-background-color: linear-gradient(to bottom right, #87CEFA, #1E90FF);" // Gradient background
+        );
+
+        Scene sc=new Scene(root,500,750);
+
+primaryStage.setScene(sc);
+primaryStage.show();
+       /* submit.setOnAction(e->
+        {
+       new menu().start(primaryStage);
+     
+        });*/
+
+    }
+   
+ 
+}
+
+package com.mycompany.bankingmanagementsystem;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class loanstatus extends Application {
+
+     Conventional findLoan(Loans loan){
+        for(Conventional i: Conventional.readData()){
+            if(i.getAccountNumber()==loan.getAccountNumber()){
+                return i;
+            }
+        }
+        return null;
+    }
+    @Override
+    public void start(Stage stage) {
+                   Label Createtittle=new Label(" United Bank Limited");
+        Createtittle.setStyle("-fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #1E90FF;");
+        BorderPane Createroot1=new BorderPane();
+        Createroot1.setTop(Createtittle);
+        BorderPane.setAlignment(Createtittle, Pos.CENTER);
+        Createroot1.setPadding(new Insets(10));
+        
+    Button backBtn = new Button("Back");
+
+backBtn.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+    
+    backBtn.setOnAction(e -> {
+        new menu().start(stage);
+    });
+
+TableView<Loans> table = new TableView<>();
+
+TableColumn<Loans, String> colHolderName = new TableColumn<>("Name");
+colHolderName.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+TableColumn<Loans, String> colAccNum = new TableColumn<>("Account Number");
+colAccNum.setCellValueFactory(new PropertyValueFactory<>("accountNumber"));
+
+TableColumn<Loans, Double> colAmount = new TableColumn<>("Amount");
+colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+TableColumn<Loans, String> colAppliedDate = new TableColumn<>("Applied Date");
+colAppliedDate.setCellValueFactory(new PropertyValueFactory<>("appliedDate"));
+
+TableColumn<Loans, Integer> colDuration = new TableColumn<>("Duration (Months)");
+colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+
+TableColumn<Loans, String> colStatus = new TableColumn<>("Status");
+colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+
+    
+
+
+table.getColumns().addAll(colHolderName, colAccNum, colAmount, colAppliedDate, colDuration, colStatus);
+table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+ObservableList<Loans> Loan = FXCollections.observableArrayList(PasswordCheck.getAccount().get(0).getLoans());
+
+table.setItems(Loan);
+
+
+
+//table.setItems(loans);
+
+VBox root = new VBox(10,Createroot1,table,backBtn);
+
+
+   
+
+        Scene scene = new Scene(root, 500, 750);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.bankingmanagementsystem;
+import java.io.Serializable;
+import java.time.LocalDate;
+/**
+ *
+ * @author Ghazi Imam Computer
+ */
+public class Loans implements Serializable {
+    private long accountNumber;
+    private String name;
+    private double amount;
+    private String duration;
+    private LocalDate appliedDate;
+    private String status; 
+
+    public Loans(String name,long accountNumber,double amount, String duration) {
+        this.name=name;
+                this.accountNumber=accountNumber;
+        this.amount = amount;
+        this.duration = duration;
+        this.appliedDate = LocalDate.now();
+        this.status = "Pending";
+    }
+
+   
+    public double getAmount() { return amount; }
+    public String getDuration() { return duration; }
+    public LocalDate getAppliedDate() { return appliedDate; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    
+    public long getAccountNumber(){
+    return accountNumber;
+}
+    public String getName(){
+        return name;
+    }
+    
+    
+}
+
+
+
+        
+
+
+
+
+
+
+ 
+        
+   
+      
+
+
+
+
+
+
+
+
+
+
+  
+        
+        
+   
+
+
+        
+   
